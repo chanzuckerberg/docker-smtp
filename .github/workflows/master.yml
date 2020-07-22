@@ -11,10 +11,10 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Docker Login
-      run: docker login docker.pkg.github.com -u namshi -p $GITHUB_TOKEN
+      run: docker login docker.pkg.github.com -u chanzuckerberg -p $GITHUB_TOKEN
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Docker Build
-      run: docker build --tag docker.pkg.github.com/namshi/docker-smtp/smtp:latest .
+      run: docker build --tag docker.pkg.github.com/chanzuckerberg/docker-smtp/smtp:latest .
     - name: Docker Publish
-      run: docker push docker.pkg.github.com/namshi/docker-smtp/smtp:latest
+      run: docker push docker.pkg.github.com/chanzuckerberg/docker-smtp/smtp:latest

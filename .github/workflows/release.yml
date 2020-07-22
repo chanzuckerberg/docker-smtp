@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - 'v*.*.*'
-      - '!v*.*.*-*'
 
 jobs:
   build:
@@ -16,13 +15,13 @@ jobs:
       run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
 
     - name: Docker Login
-      run: docker login docker.pkg.github.com -u namshi -p $GITHUB_TOKEN
+      run: docker login docker.pkg.github.com -u chanzuckerberg -p $GITHUB_TOKEN
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Docker Build
-      run: docker build --tag docker.pkg.github.com/namshi/docker-smtp/smtp:${{ steps.get_version.outputs.VERSION }} .
+      run: docker build --tag docker.pkg.github.com/chanzuckerberg/docker-smtp/smtp:${{ steps.get_version.outputs.VERSION }} .
     - name: Docker Publish
-      run: docker push docker.pkg.github.com/namshi/docker-smtp/smtp:${{ steps.get_version.outputs.VERSION }}
+      run: docker push docker.pkg.github.com/chanzuckerberg/docker-smtp/smtp:${{ steps.get_version.outputs.VERSION }}
 
     - name: Create Release
       id: create_release
